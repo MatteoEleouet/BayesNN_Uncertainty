@@ -58,3 +58,28 @@ BibTeX entry:
   archivePrefix={arXiv},
   primaryClass={stat.ML}
 }```
+
+```bibtex
+@article{simonyan2014very,
+  title={Very deep convolutional networks for large-scale image recognition},
+  author={Simonyan, Karen and Zisserman, Andrew},
+  journal={arXiv preprint arXiv:1409.1556},
+  year={2014}
+}```
+
+```bibtex
+@article{szegedy2016rethinking,
+  title={Rethinking the Inception Architecture for Computer Vision},
+  author={Szegedy, Christian and Vanhoucke, Vincent and Ioffe, Sergey and Shlens, Jon and Wojna, Zbigniew},
+  journal={arXiv preprint arXiv:1512.00567},
+  year={2016}
+}```
+
+```bibtex
+@article{dosovitskiy2020image,
+  title={An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale},
+  author={Dosovitskiy, Alexey and Beyer, Lucas and Kolesnikov, Alexander and Weissenborn, Dirk and Zhai, Xiaohua and Unterthiner, Thomas and Dehghani, Mostafa and Minderer, Matthias and Heigold, Georg and Gelly, Sylvain and others},
+  journal={arXiv preprint arXiv:2010.11929},
+  year={2020}
+}```
+
