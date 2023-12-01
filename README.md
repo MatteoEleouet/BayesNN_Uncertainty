@@ -45,12 +45,16 @@ This will start the training process and display the visualizations upon complet
 
 ## Citation
 
-If you find this work useful, please cite the original paper: https://arxiv.org/abs/1505.05424
-```@article{blundell2015weight,
-      title={Weight Uncertainty in Neural Networks}, 
-      author={Charles Blundell and Julien Cornebise and Koray Kavukcuoglu and Daan Wierstra},
-      year={2015},
-      eprint={1505.05424},
-      archivePrefix={arXiv},
-      primaryClass={stat.ML}
+https://arxiv.org/abs/1505.05424
+Blundell, C., Cornebise, J., Kavukcuoglu, K., & Wierstra, D. (2015). Weight Uncertainty in Neural Networks. arXiv preprint arXiv:1505.05424.
+
+BibTeX entry:
+```bibtex
+@article{blundell2015weight,
+  title={Weight Uncertainty in Neural Networks},
+  author={Blundell, Charles and Cornebise, Julien and Kavukcuoglu, Koray and Wierstra, Daan},
+  year={2015},
+  eprint={1505.05424},
+  archivePrefix={arXiv},
+  primaryClass={stat.ML}
 }```
