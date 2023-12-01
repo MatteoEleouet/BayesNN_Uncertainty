@@ -82,6 +82,19 @@ class BayesianNeuralNetwork(nn.Module):
 
         return h, W1, W2, W3, b1, b2, b3
 
+# Function to calculate the entropy of predictions
+def predictive_entropy(y_hat):
+    return -torch.sum(y_hat * torch.log(y_hat + 1e-8), axis=1)
+
+# Function to visualize weight distributions
+def plot_weight_distributions(weights, epoch):
+    fig, axs = plt.subplots(1, len(weights), figsize=(15, 3))
+    for i, weight in enumerate(weights):
+        axs[i].hist(weight.detach().cpu().numpy().flatten(), bins=50, alpha=0.7)
+        axs[i].set_title(f'Layer {i+1} Weight Distribution at Epoch {epoch+1}')
+    plt.tight_layout()
+    plt.show()
+
 
 # Main Script
 if __name__ == '__main__':
@@ -113,13 +126,17 @@ if __name__ == '__main__':
     epsilon_prior = torch.tensor(0.001).to("cuda")
     n_samples = 1
     learning_rate = 0.001
-    n_epochs = 20
+    n_epochs = 10
     batch_size = 100
 
     # Initialize the model and move it to the GPU
     model = BayesianNeuralNetwork(
         n_input, n_hidden_1, n_hidden_2, n_output).to("cuda")
     optimizer = optim.Adam(model.parameters(), lr=learning_rate)
+
+    train_losses = []
+    validation_accuracies = []
+    weight_distributions = {i: [] for i in range(1, 4)}  # Assuming three layers for simplicity
 
     # Training loop
     for epoch in range(n_epochs):
@@ -230,33 +247,41 @@ if __name__ == '__main__':
 
     # Feature Importance for 5 Samples
     num_samples = 5
-    sample_indices = np.random.choice(
-        len(test_data), num_samples, replace=False)
-    fig = plt.figure(figsize=(6, 2 * num_samples))
-    gs = gridspec.GridSpec(num_samples, 2, width_ratios=[1, 1])
+    sample_indices = np.random.choice(len(test_data), num_samples, replace=False)
+    fig = plt.figure(figsize=(9, 2 * num_samples))  # Adjust the figure size to accommodate three columns
+    gs = gridspec.GridSpec(num_samples, 3, width_ratios=[1, 1, 1])  # Now we have three columns in GridSpec
 
     for i, idx in enumerate(sample_indices):
         sample_data = test_data[idx]
         sample_data.requires_grad_(True)
 
+        # Obtain model output
         output = model(sample_data.unsqueeze(0), epsilon_prior)[0]
-        max_output = torch.max(output)
         model.zero_grad()
-        max_output.backward()
+        output.max().backward()
 
+        # Get gradients for input_grad
         input_grad = sample_data.grad.detach().cpu().numpy().reshape(28, 28)
         heatmap = np.abs(input_grad)
 
+        # Original image
         ax1 = plt.subplot(gs[i, 0])
-        ax1.imshow(sample_data.detach().cpu(
-        ).numpy().reshape(28, 28), cmap='gray')
+        ax1.imshow(sample_data.detach().cpu().numpy().reshape(28, 28), cmap='gray')
         ax1.set_title('Actual Image')
         ax1.axis('off')
 
+        # Heatmap of feature importance
         ax2 = plt.subplot(gs[i, 1])
         ax2.imshow(heatmap, cmap='hot')
         ax2.set_title('Feature Importance')
         ax2.axis('off')
+
+        # Overlay of the actual image and the heatmap
+        ax3 = plt.subplot(gs[i, 2])
+        ax3.imshow(sample_data.detach().cpu().numpy().reshape(28, 28), cmap='gray', alpha=0.5)
+        ax3.imshow(heatmap, cmap='hot', alpha=0.5)
+        ax3.set_title('Overlay')
+        ax3.axis('off')
 
     plt.tight_layout()
     plt.show()
