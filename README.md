@@ -15,13 +15,13 @@ Traditional neural networks use fixed values for weights, leading to models that
 
 ## Visualization Results
 
-![Weight Distributions](./Figure_1.png)
+![Prediction Confidence Histogram](./Figure_1.png)
+*Figure 1: Histogram of prediction confidence scores, showcasing the model's certainty in its predictions.*
+
+![Weight Distributions](./Figure_2.png)
 *Figure 1: Weight distributions across different layers of the Bayesian Neural Network.*
 
-![Feature Importance](./Figure_2.png)
-*Figure 2: Feature importance maps for a subset of MNIST digits, illustrating which pixels influence the model's predictions.*
-
-![Prediction Confidence Histogram](./Figure_5.png)
+![Feature Importance](./Figure_3.png)
 *Figure 3: Histogram of prediction confidence scores, showcasing the model's certainty in its predictions.*
 
 ![Class Probabilities and Uncertainty Intervals](./Figure_4.png)
