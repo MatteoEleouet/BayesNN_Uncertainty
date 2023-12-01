@@ -25,7 +25,7 @@ Traditional neural networks use fixed values for weights, leading to models that
 *Figure 3: Histogram of prediction confidence scores, showcasing the model's certainty in its predictions.*
 
 ![Class Probabilities and Uncertainty Intervals](./Figure_4.png)
-*Figure 4: Probabilities and uncertainty intervals for each class across multiple samples, providing insight into the model's certainty across different classes.*
+*Figure 4: Probabilities and uncertainty intervals for each class, providing insight into the model's certainty across different classes.*
 
 ## Requirements
 
